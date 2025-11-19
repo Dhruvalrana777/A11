@@ -1,0 +1,295 @@
+/* ------------------------------ */
+/*          ROOT + RESET          */
+/* ------------------------------ */
+
+:root {
+    --accent-color: #800000;
+    --gradient-color: #f6bb73;
+
+    --light_menu: white;
+    --mid_menu: antiquewhite;
+    --dark_menu: black;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: calc(15px + .2vw);
+    width: min(80%, 1024px);
+    line-height: 1.5;
+    margin: auto;
+    border: 2px solid var(--accent-color);
+}
+
+h1, h2, h3, p, ul {
+    padding: .25em 0;
+}
+
+a:hover, a:focus {
+    font-style: italic;
+    color: var(--accent-color);
+}
+
+h1 { font-size: 150%; }
+h2 { font-size: 130%; color: var(--accent-color); }
+h3 { font-size: 105%; }
+ul { margin-left: 2em; }
+
+
+/* ------------------------------ */
+/*             HEADER             */
+/* ------------------------------ */
+
+header {
+    text-align: center;
+    background-image: linear-gradient(
+            30deg, var(--gradient-color) 0%, white 30%, white 65%, var(--gradient-color) 100%
+    );
+    border-bottom: 2px solid var(--accent-color);
+}
+
+header img {
+    display: none; /* mobile-first */
+}
+
+header h2 {
+    font-size: 175%;
+    padding-top: .5em;
+}
+
+header h3 {
+    font-size: 130%;
+    font-style: italic;
+    padding-bottom: 1em;
+}
+
+
+/* ------------------------------ */
+/*         NAVIGATION (MOBILE)    */
+/* ------------------------------ */
+
+.navbar {
+    background-color: var(--accent-color);
+    position: relative;
+}
+
+.navbar ul {
+    list-style-type: none;
+}
+
+.menu {
+    position: absolute;
+    left: 0;
+    width: 40%;
+    background-color: var(--accent-color);
+    display: none;
+}
+
+.menu li a {
+    display: block;
+    padding: 1em;
+    text-decoration: none;
+    margin: 0 2px 2px 0;
+    color: var(--light_menu);
+}
+
+.menu li:first-child a { margin-left: 0; }
+.menu li:last-child a { margin-right: 0; }
+
+
+/* HAMBURGER BUTTON */
+
+.menu-btn {
+    display: inline-block;
+    padding: 1em;
+    cursor: pointer;
+    color: var(--light_menu);
+    font-size: 1.2rem;
+}
+
+.menu-btn .menu-icon::before {
+    content: "☰"; /* hamburger */
+}
+
+.menu-toggle {
+    display: none;
+}
+
+/* SHOW MENU WHEN CHECKED */
+.menu-toggle:checked ~ .menu {
+    display: block;
+}
+
+/* CHANGE ICON TO X */
+.menu-toggle:checked + .menu-btn .menu-icon::before {
+    content: "✖";
+}
+
+
+/* ------------------------------ */
+/*        SUBMENU (MOBILE)        */
+/* ------------------------------ */
+
+.submenu > a small::after {
+    content: " ▶"; /* right arrow */
+}
+
+.dropdown {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 100%;
+    background-color: var(--accent-color);
+    display: none;
+}
+
+.submenu:hover > .dropdown {
+    display: block;
+}
+
+.dropdown > li a {
+    margin: 2px;
+}
+
+
+/* ------------------------------ */
+/*        MAIN (MOBILE FIRST)     */
+/* ------------------------------ */
+
+main {
+    display: flex;
+    flex-direction: column-reverse; /* mobile-first requirement */
+    padding: 0 1em 1em;
+}
+
+section {
+    padding-left: .5em;
+    border-bottom: 2px solid var(--accent-color); /* required mobile-first */
+}
+
+section img {
+    width: clamp(100px, 50%, 250px);
+    float: right;
+    margin: 0 1em .25em;
+}
+
+aside {
+    padding-right: .5em;
+}
+
+main blockquote {
+    font-style: italic;
+    padding-left: 1em;
+}
+
+main h3 + img {
+    width: clamp(40px, 50%, 75px);
+    border: 4px double var(--accent-color);
+    border-radius: 10px;
+}
+
+
+/* ------------------------------ */
+/*             FOOTER             */
+/* ------------------------------ */
+
+footer {
+    background-color: var(--accent-color);
+}
+
+footer p {
+    text-align: center;
+    color: white;
+    padding: 1em 0;
+}
+
+
+/* ------------------------------ */
+/*     BREAKPOINT: HEADER (520px) */
+/* ------------------------------ */
+
+@media (min-width: 520px) {
+
+    header {
+        text-align: left;
+    }
+
+    header img {
+        display: block;
+        float: left;
+        width: clamp(40px, 15%, 80px);
+        margin: .75em 1em;
+    }
+}
+
+
+/* ------------------------------ */
+/*    BREAKPOINT: NAV MENU 640px  */
+/* ------------------------------ */
+
+@media (min-width: 640px) {
+
+    .menu {
+        display: flex;
+        flex-wrap: wrap;
+        position: relative;
+        width: 100%;
+    }
+
+    .menu-btn {
+        display: none;
+    }
+
+    .menu li {
+        flex-basis: 20%;
+        text-align: center;
+    }
+
+    .submenu > a small::after {
+        content: " ▼"; /* down arrow */
+    }
+
+    .dropdown {
+        top: auto;
+        left: 0;
+        right: 0;
+        width: auto;
+        position: absolute;
+    }
+
+    .navbar a {
+        margin: 0 1px 2px;
+    }
+}
+
+
+/* ------------------------------ */
+/*    BREAKPOINT: LAYOUT 768px    */
+/* ------------------------------ */
+
+@media (min-width: 768px) {
+
+    /* MAIN 2-column layout */
+    main {
+        flex-direction: row;
+    }
+
+    section {
+        flex-basis: 75%;
+        border-bottom: none; /* remove mobile border */
+    }
+
+    aside {
+        flex-basis: 25%;
+    }
+
+    /* NAV MENU stays horizontal */
+    .menu {
+        flex-direction: row;
+    }
+}
